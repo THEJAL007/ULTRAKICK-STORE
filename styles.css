@@ -1308,3 +1308,19 @@ footer {
   color: white;
   font-size: 16px;
 }
+/* --- Final Layout Fixes --- */
+.product-card img {
+    width: 100%;       /* Fits the width of the card */
+    height: 250px;     /* Forces all images to be the same height */
+    object-fit: cover; /* Crops the image perfectly so it doesn't stretch */
+    border-radius: 10px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.product-card {
+    overflow: hidden;  /* Keeps everything neat inside the card */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
