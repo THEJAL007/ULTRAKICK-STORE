@@ -1,363 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRA KICK | Football Store</title>
     <link rel="stylesheet" href="styles.css">
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <title>ULTRAKICK — Ultimate Football Store</title>
-
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Barlow+Condensed:wght@600;700;900&display=swap" rel="stylesheet"/>
-
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- Your CSS -->
-  <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
 
-  <!-- ════════════════════════════════════════════
-       NAVBAR
-  ════════════════════════════════════════════ -->
-  <nav id="navbar">
-    <a href="#home" class="logo">
-      <span class="logo-ball">⚽</span>
-      ULTRA<span class="logo-accent">KICK</span>
-    </a>
+    <header>
+        <nav>
+            <div class="logo">ULTRA<span>KICK</span></div>
+            <ul>
+                <li><a href="#jerseys">Jerseys</a></li>
+                <li><a href="#boots">Boots</a></li>
+                <li><a href="#balls">Balls</a></li>
+            </ul>
+            <div class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cart-count">0</span>
+            </div>
+        </nav>
+    </header>
 
-    <ul class="nav-links" id="navLinks">
-      <li><a href="#home"       onclick="closeNav()">Home</a></li>
-      <li><a href="#shop"       onclick="closeNav()">Shop</a></li>
-      <li><a href="#categories" onclick="closeNav()">Categories</a></li>
-      <li><a href="#contact"    onclick="closeNav()">Contact</a></li>
-      <li>
-        <a href="#" class="nav-cart-btn" onclick="toggleCart(event)">
-          <i class="fas fa-shopping-bag"></i>
-          Cart
-          <span class="cart-badge" id="cartCount">0</span>
-        </a>
-      </li>
-    </ul>
+    <main>
+        <section class="hero">
+            <h1>GEAR UP FOR THE GAME</h1>
+            <p>Premium Football Kits, Boots, and Accessories</p>
+            <button class="shop-now">SHOP NOW</button>
+        </section>
 
-    <button class="hamburger" id="hamburger" onclick="toggleNav()" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
+        <section id="jerseys" class="product-section">
+            <h2><i class="fas fa-tshirt"></i> FOOTBALL JERSEYS</h2>
+            <div id="jerseys-grid" class="product-grid">
+                <p class="loading">Connecting to locker room...</p>
+            </div>
+        </section>
 
+        <section id="boots" class="product-section">
+            <h2><i class="fas fa-shoe-prints"></i> FOOTBALL BOOTS</h2>
+            <div id="boots-grid" class="product-grid">
+                <p class="loading">Loading speed...</p>
+            </div>
+        </section>
 
-  <!-- ════════════════════════════════════════════
-       HERO
-  ════════════════════════════════════════════ -->
-  <section id="home">
-    <div class="hero-bg"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-grid"></div>
+        <section id="balls" class="product-section">
+            <h2><i class="fas fa-circle"></i> MATCH BALLS</h2>
+            <div id="balls-grid" class="product-grid">
+                <p class="loading">Inflating match balls...</p>
+            </div>
+        </section>
+    </main>
 
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="dot"></span>
-        🏆 Season 2025 Collection
-      </div>
-      <h1 class="hero-title">
-        Welcome to the
-        <span class="line-green">Ultimate</span>
-        <span>Football <span class="line-accent">Store</span></span>
-      </h1>
-      <p class="hero-desc">
-        Gear up with the finest jerseys, boots &amp; match balls.
-        Official kits from the world's greatest clubs — delivered to your door.
-      </p>
-      <div class="hero-actions">
-        <a href="#shop" class="btn-hero-primary">
-          <i class="fas fa-bolt"></i>
-          <span>Shop Now</span>
-        </a>
-        <a href="#categories" class="btn-hero-outline">Browse Categories</a>
-      </div>
-    </div>
+    <footer>
+        <p>&copy; 2026 ULTRA KICK STORE | Built for Champions</p>
+    </footer>
 
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="hero-stat-num">18+</div>
-        <div class="hero-stat-label">Products</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">100%</div>
-        <div class="hero-stat-label">Official</div>
-      </div>
-      <div class="hero-stat">
-        <div class="hero-stat-num">Fast</div>
-        <div class="hero-stat-label">Delivery</div>
-      </div>
-    </div>
-
-    <div class="scroll-cue">
-      <span>Scroll</span>
-      <i class="fas fa-chevron-down"></i>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       CATEGORIES
-  ════════════════════════════════════════════ -->
-  <section id="categories" class="section-pad">
-    <div class="section-header">
-      <div class="section-tag">Browse</div>
-      <h2 class="section-title">Shop By Category</h2>
-      <div class="section-divider"></div>
-    </div>
-
-    <div class="cat-grid">
-      <div class="cat-card" onclick="animateGo('jersey','👕','JERSEYS')">
-        <span class="cat-emoji">👕</span>
-        <h3>Jerseys</h3>
-        <p>Official club &amp; national kits</p>
-        <span class="cat-arrow"><i class="fas fa-arrow-down"></i> View all</span>
-      </div>
-      <div class="cat-card" onclick="animateGo('boots','👟','FOOTBALL BOOTS')">
-        <span class="cat-emoji">👟</span>
-        <h3>Football Boots</h3>
-        <p>Elite performance footwear</p>
-        <span class="cat-arrow"><i class="fas fa-arrow-down"></i> View all</span>
-      </div>
-      <div class="cat-card" onclick="animateGo('balls','⚽','MATCH BALLS')">
-        <span class="cat-emoji">⚽</span>
-        <h3>Match Balls</h3>
-        <p>Official &amp; training balls</p>
-        <span class="cat-arrow"><i class="fas fa-arrow-down"></i> View all</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Category Animation Overlay -->
-  <div id="animOverlay">
-    <div class="anim-box">
-      <span id="animEmoji"></span>
-      <div id="animLabel"></div>
-    </div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════════
-       SHOP HEADER
-  ════════════════════════════════════════════ -->
-  <section id="shop">
-    <div class="section-header">
-      <div class="section-tag">Our Products</div>
-      <h2 class="section-title">The Full Collection</h2>
-      <p class="section-sub">Data loaded live from MySQL · Powered by Node/Flask API</p>
-      <div class="section-divider"></div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       JERSEYS
-  ════════════════════════════════════════════ -->
-  <div class="products-wrap" id="jersey">
-    <div class="product-section-heading">
-      <i class="fas fa-tshirt"></i> Football Jerseys
-    </div>
-    <div class="product-grid" id="jerseyGrid"></div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════════
-       BOOTS
-  ════════════════════════════════════════════ -->
-  <div class="products-wrap alt" id="boots">
-    <div class="product-section-heading">
-      <i class="fas fa-shoe-prints"></i> Football Boots
-    </div>
-    <div class="product-grid" id="bootsGrid"></div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════════
-       BALLS
-  ════════════════════════════════════════════ -->
-  <div class="products-wrap" id="balls">
-    <div class="product-section-heading">
-      <i class="fas fa-futbol"></i> Match Balls
-    </div>
-    <div class="product-grid" id="ballsGrid"></div>
-  </div>
-
-
-  <!-- ════════════════════════════════════════════
-       CONTACT
-  ════════════════════════════════════════════ -->
-  <section id="contact" class="section-pad">
-    <div class="section-header">
-      <div class="section-tag">Get In Touch</div>
-      <h2 class="section-title">Contact Us</h2>
-      <div class="section-divider"></div>
-    </div>
-
-    <div class="contact-grid">
-      <div class="contact-card">
-        <div class="c-icon ig">
-          <i class="fab fa-instagram" style="color:#fff"></i>
-        </div>
-        <div>
-          <div class="c-label">Instagram</div>
-          <a href="https://www.instagram.com" target="_blank" rel="noopener">
-            <i class="fas fa-external-link-alt" style="font-size:.7rem"></i>
-            @ultrakick_store
-          </a>
-        </div>
-      </div>
-
-      <div class="contact-card">
-        <div class="c-icon mail">
-          <i class="fas fa-envelope" style="color:#fff"></i>
-        </div>
-        <div>
-          <div class="c-label">Email</div>
-          <a href="mailto:25aimb57@kristujayanti.com">25aimb57@kristujayanti.com</a>
-        </div>
-      </div>
-
-      <div class="contact-card">
-        <div class="c-icon phone">
-          <i class="fas fa-phone" style="color:#000"></i>
-        </div>
-        <div>
-          <div class="c-label">Phone / WhatsApp</div>
-          <a href="tel:+919074045262">+91 90740 45262</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════════════════════════════════
-       FOOTER
-  ════════════════════════════════════════════ -->
-  <footer>
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <div class="footer-logo">⚽ ULTRA<span>KICK</span></div>
-        <p class="footer-desc">
-          Your one-stop destination for premium football gear —
-          jerseys, boots &amp; match balls from the world's top clubs.
-        </p>
-        <div class="footer-socials">
-          <a href="https://www.instagram.com" target="_blank" class="f-social">
-            <i class="fab fa-instagram"></i>
-          </a>
-          <a href="mailto:25aimb57@kristujayanti.com" class="f-social">
-            <i class="fas fa-envelope"></i>
-          </a>
-          <a href="tel:+919074045262" class="f-social">
-            <i class="fas fa-phone"></i>
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-col">
-        <h4>Quick Links</h4>
-        <ul>
-          <li><a href="#home"><i class="fas fa-chevron-right"></i> Home</a></li>
-          <li><a href="#shop"><i class="fas fa-chevron-right"></i> Shop</a></li>
-          <li><a href="#categories"><i class="fas fa-chevron-right"></i> Categories</a></li>
-          <li><a href="#contact"><i class="fas fa-chevron-right"></i> Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-col">
-        <h4>Categories</h4>
-        <ul>
-          <li><a href="#jersey"><i class="fas fa-chevron-right"></i> Jerseys</a></li>
-          <li><a href="#boots"><i class="fas fa-chevron-right"></i> Football Boots</a></li>
-          <li><a href="#balls"><i class="fas fa-chevron-right"></i> Match Balls</a></li>
-        </ul>
-      </div>
-    </div>
-
-    <div class="footer-bottom">
-      <p>© 2025 <span>UltraKick Football Store</span>. All Rights Reserved.</p>
-      <p>Made with <span>❤️</span> for the beautiful game</p>
-    </div>
-  </footer>
-
-
-  <!-- ════════════════════════════════════════════
-       CART SIDEBAR
-  ════════════════════════════════════════════ -->
-  <div id="cartOverlay" onclick="toggleCart()"></div>
-
-  <aside id="cartSidebar" role="dialog" aria-label="Shopping Cart">
-    <div class="cart-head">
-      <h3><i class="fas fa-shopping-bag"></i> Your Cart</h3>
-      <button class="cart-close" onclick="toggleCart()" aria-label="Close cart">
-        <i class="fas fa-times"></i>
-      </button>
-    </div>
-    <div class="cart-body" id="cartBody">
-      <div class="cart-empty-state">
-        <i class="fas fa-shopping-bag"></i>
-        <p>Your cart is empty</p>
-        <small>Add some football gear to get started!</small>
-      </div>
-    </div>
-    <div class="cart-foot">
-      <div class="cart-summary">
-        <span class="cart-summary-label">Order Total</span>
-        <span class="cart-total-val" id="cartTotal">₹0</span>
-      </div>
-      <p class="cart-note">Free delivery on orders above ₹999</p>
-      <button class="checkout-btn" onclick="openCheckout()">
-        <i class="fas fa-lock"></i> Proceed to Checkout
-      </button>
-    </div>
-  </aside>
-
-
-  <!-- ════════════════════════════════════════════
-       TOAST NOTIFICATION
-  ════════════════════════════════════════════ -->
-  <div id="toast">
-    <i class="fas fa-check-circle"></i>
-    <span id="toastText"></span>
-  </div>
-
-
-  <!-- ════════════════════════════════════════════
-       API STATUS INDICATOR
-  ════════════════════════════════════════════ -->
-  <div id="apiStatus">
-    <div id="apiDot" class="loading"></div>
-    <span id="apiStatusText">Connecting…</span>
-  </div>
-
-
-  <!-- Your JS (always last) -->
-  <script src="script.js"></script>
-  <div id="checkoutModal" class="modal">
-  <div class="modal-content">
-    <span class="close-btn" onclick="closeCheckout()">&times;</span>
-    <h2>Finalize Your Order ⚽</h2>
-    <form id="checkoutForm" onsubmit="processOrder(event)">
-      <div class="input-group">
-        <label>Full Name</label>
-        <input type="text" id="custName" required placeholder="Enter your name">
-      </div>
-      <div class="input-group">
-        <label>Shipping Address</label>
-        <textarea id="custAddress" required placeholder="Enter full address"></textarea>
-      </div>
-      <div class="input-group">
-        <label>Phone Number</label>
-        <input type="tel" id="custPhone" required placeholder="e.g. +91 98765 43210">
-      </div>
-      <div id="orderSummary"></div>
-      <button type="submit" class="confirm-btn">Place Order (Cash on Delivery)</button>
-    </form>
-  </div>
-</div>
-
+    <script src="script.js"></script>
 </body>
 </html>
