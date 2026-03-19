@@ -1,21 +1,20 @@
+
 const express = require('express');
 const { Pool } = require('pg');
 const cors = require('cors');
 const path = require('path');
 
 const app = express();
-// Render provides a port automatically, or it uses 3000 locally
 const port = process.env.PORT || 3000;
 
 // 1. Middleware
 app.use(cors());
 app.use(express.json());
 
-// 2. Serve Images (This allows the browser to see the files in your 'images' folder)
+// 2. Serve Images (Crucial: This lets Render show your images)
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
-// 3. Setup the Connection to your PostgreSQL
-// This checks if we are on Render (Production) or your laptop (Local)
+// 3. Database Connection Logic
 const isProduction = process.env.DATABASE_URL;
 
 const pool = new Pool({
@@ -23,9 +22,7 @@ const pool = new Pool({
   ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
-// 4. API Routes (Mapping to your 3 specific tables)
-
-// GET Jerseys from the 'jerseys' table
+// 4. API Routes
 app.get('/api/jerseys', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM jerseys ORDER BY id ASC');
@@ -36,7 +33,6 @@ app.get('/api/jerseys', async (req, res) => {
   }
 });
 
-// GET Boots from the 'boots' table
 app.get('/api/boots', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM boots ORDER BY id ASC');
@@ -47,7 +43,6 @@ app.get('/api/boots', async (req, res) => {
   }
 });
 
-// GET Balls from the 'balls' table
 app.get('/api/balls', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM balls ORDER BY id ASC');
@@ -58,7 +53,6 @@ app.get('/api/balls', async (req, res) => {
   }
 });
 
-// 5. Connection Test Route
 app.get('/test-db', async (req, res) => {
   try {
     const result = await pool.query('SELECT NOW()');
@@ -68,13 +62,6 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-// 6. Start the server
 app.listen(port, () => {
-  console.log(`
-  ✅ UltraKick Server is Live!
-  ----------------------------
-  Base URL: http://localhost:${port}
-  Database: ULTRA KICK
-  ----------------------------
-  `);
+  console.log(`✅ UltraKick Server Live on port ${port}`);
 });
