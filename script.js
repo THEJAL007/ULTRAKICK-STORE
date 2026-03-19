@@ -1,65 +1,46 @@
+// Replace this with your actual Render URL
 const API_BASE = 'https://ultrakick-store-1.onrender.com';
 
-// Function to fetch data from your Node.js/MySQL Backend
-async function fetchSection(sectionId, endpoint) {
-    const grid = document.getElementById(sectionId);
-    
+async function fetchProducts(endpoint, gridId) {
+    const grid = document.getElementById(gridId);
     try {
-        const response = await fetch(`${API_BASE}${endpoint}`);
+        const response = await fetch(`${API_BASE}/api/${endpoint}`);
+        if (!response.ok) throw new Error('Network response was not ok');
         
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        
-        const data = await response.json();
-        grid.innerHTML = ''; // Clear the "Loading..." text
+        const products = await response.json();
+        grid.innerHTML = ''; // Clear loading text
 
-        if (data.length === 0) {
-            grid.innerHTML = '<p class="no-data">No products found in database.</p>';
+        if (products.length === 0) {
+            grid.innerHTML = '<p>No products found.</p>';
             return;
         }
 
-        data.forEach(item => {
-            const card = `
-                <div class="product-card">
-                    ${item.badge ? `<span class="tag ${item.badge.toLowerCase()}">${item.badge}</span>` : ''}
-                    <div class="product-image">
-                        <img src="${item.image_path}" alt="${item.name}" onerror="this.src='images/placeholder.jpg'">
-                    </div>
-                    <div class="product-info">
-                        <h3>${item.name}</h3>
-                        <p>${item.sub_text || ''}</p>
-                        <div class="price">₹${item.price.toLocaleString()}</div>
-                        ${item.sizes ? `<div class="sizes">Size: ${item.sizes}</div>` : ''}
-                        <button class="add-btn" onclick="addToCart('${item.name}', ${item.price})">
-                            <i class="fas fa-plus"></i> ADD TO CART
-                        </button>
-                    </div>
-                </div>`;
-            grid.innerHTML += card;
+        products.forEach(product => {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            // This line ensures images load from the Render server
+            const imageSrc = `${API_BASE}/${product.image_path}`;
+
+            card.innerHTML = `
+                <div class="badge">${product.badge || ''}</div>
+                <img src="${imageSrc}" alt="${product.name}" onerror="this.src='images/placeholder.jpg'">
+                <h3>${product.name}</h3>
+                <p>${product.sub || ''}</p>
+                <div class="price">₹${product.price}</div>
+                <button class="add-btn">+ ADD TO CART</button>
+            `;
+            grid.appendChild(card);
         });
     } catch (error) {
-        console.error(`Error loading ${sectionId}:`, error);
-        grid.innerHTML = `
-            <div class="error-container">
-                <p class="error-msg">Offline: Unable to connect to Database</p>
-                <small>Make sure your Node.js server is running on localhost:3000</small>
-            </div>`;
+        console.error('Error:', error);
+        grid.innerHTML = `<p class="error">Offline: Check back later.</p>`;
     }
 }
 
-// Simple Cart Functionality (Local Storage)
-function addToCart(name, price) {
-    let cart = JSON.parse(localStorage.getItem('cart')) || [];
-    cart.push({ name, price });
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(`${name} added to cart!`);
-}
-
-// Initialize the page and fetch all sections
+// Initialize all sections
 document.addEventListener('DOMContentLoaded', () => {
-    console.log("Connecting to Database at:", API_BASE);
-    fetchSection('jerseyGrid', '/api/jerseys');
-    fetchSection('bootsGrid', '/api/boots');
-    fetchSection('ballsGrid', '/api/balls');
+    fetchProducts('jerseys', 'jerseys-grid');
+    fetchProducts('boots', 'boots-grid');
+    fetchProducts('balls', 'balls-grid'); // Fixed: Points to balls endpoint
 });
