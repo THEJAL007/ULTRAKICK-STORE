@@ -4,7 +4,8 @@ const cors = require('cors');
 const path = require('path');
 
 const app = express();
-const port = 3000;
+// Render provides a port automatically, or it uses 3000 locally
+const port = process.env.PORT || 3000;
 
 // 1. Middleware
 app.use(cors());
@@ -14,12 +15,12 @@ app.use(express.json());
 app.use('/images', express.static(path.join(__dirname, 'images')));
 
 // 3. Setup the Connection to your PostgreSQL
+// This checks if we are on Render (Production) or your laptop (Local)
+const isProduction = process.env.DATABASE_URL;
+
 const pool = new Pool({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'ULTRA KICK', // Ensure this matches exactly in pgAdmin
-  password: 'thejal@20061892', 
-  port: 5432,
+  connectionString: isProduction ? process.env.DATABASE_URL : 'postgresql://postgres:thejal@20061892@localhost:5432/ULTRA KICK',
+  ssl: isProduction ? { rejectUnauthorized: false } : false
 });
 
 // 4. API Routes (Mapping to your 3 specific tables)
