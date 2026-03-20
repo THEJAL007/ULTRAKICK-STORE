@@ -1,12 +1,4 @@
-/* Core Layout */
-body {
-    background-color: #050505;
-    color: white;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin: 0;
-}
-
-/* Fix Navigation Bar */
+/* --- HEADER & NAVIGATION --- */
 nav {
     display: flex;
     justify-content: space-between;
@@ -17,60 +9,37 @@ nav {
 }
 
 nav ul {
-    display: flex; /* Makes Jerseys, Boots, Balls sit in a row */
+    display: flex; /* This forces links into a horizontal row */
     list-style: none;
     gap: 30px;
     margin: 0;
-    padding: 0;
 }
 
 nav ul li a {
     color: #00ff88;
     text-decoration: none;
-    font-weight: 800;
+    font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.9rem;
 }
 
-/* Product Grid Layout */
+/* --- PRODUCT GRID --- */
 .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
-    padding: 40px 5%;
+    padding: 20px 5%;
 }
 
-/* Product Card Styling */
 .product-card {
     background: #111;
-    border-radius: 12px;
+    border-radius: 10px;
     overflow: hidden;
-    transition: transform 0.3s ease;
     border: 1px solid #222;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
-    border-color: #00ff88;
+    text-align: center;
 }
 
 .product-card img {
     width: 100%;
-    height: 300px; /* Fixed height for consistency */
+    height: 280px;
     object-fit: cover; /* Prevents images from stretching */
-}
-
-.product-info {
-    padding: 15px;
-}
-
-.add-btn {
-    width: 100%;
-    background: #00ff88;
-    color: #000;
-    border: none;
-    padding: 12px;
-    font-weight: bold;
-    border-radius: 5px;
-    cursor: pointer;
 }
